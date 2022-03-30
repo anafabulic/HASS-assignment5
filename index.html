@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Improving Data Viz</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/gruvbox-light.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h3>Improving Data Visualisation</h3>
+					<p>
+						<img src="images/chart-treemap.png" height="200">
+					</p>
+					<p>
+						<small>Sean Chua / 1006466</small>
+					</p>
+					<p>
+						<small>Prepared for HASS02.546: Interactive Data Visualisation</small>
+					</p>
+				</section>
+				<section>
+					<section>
+						<h4>The case: President Obama&rsquo;s budget (2016)</h4>
+						<p>&darr;</p>
+					</section>
+					<section>
+						<a href="https://obamawhitehouse.archives.gov/interactive-budget" target="_blank">
+							<img src="images/whitehouse.png" class="r-stretch">
+						</a>
+					</section>
+					<section>
+						<p>Obama can do <em>better.</em></p>
+					</section>
+				</section>
+				<section style="text-align:left;">
+					<section>
+						<h1>:)</h1>
+						<h4>What it&rsquo;s doing (okay-ly):</h4>
+						<p>
+							The <em>treemap</em> helps us see parts of the budget in relation to the whole. 
+						</p>
+						<p>
+							<em>Area</em> encodes spending priorities.
+						</p>
+						<p>
+							<em>Position</em> and <em>colour</em> encodes hierarchical information. 
+						</p>
+						<p>&darr;</p>
+					</section>
+					<section>
+						<h1>:(</h1>
+						<h4>What it&rsquo;s doing (poorly):</h4>
+						<p>Smaller budget areas are <em>impossible to see.</em></p>
+						<p>Area is a <em>poor channel</em> for encoding information.</p>
+						<p><small>(even if redundantly-encoded with length.)</small></p>
+						<p>&darr;</p>
+					</section>
+					<section>
+						<h1>:/</h1>
+						<h4>also:</h4>
+						<p>The font size is <em>static</em>, making it unreadable & messy.</p>
+						<p>Possible <em>web rot</em> in formatting.</p>
+						<p>Where&rsquo;s the <em><strong>spending</strong></em>?</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3 class="r-fit-text">How can we improve this?</h3>
+						<p>&darr;</p>
+					</section>
+					<section>
+						<h4>Radical suggestion:</h4>
+						<img src="images/barchart-1.svg">
+					</section>
+					<section>
+						<h4>Bars convey magnitude better.</h4>
+						<img src="images/barchart-2.svg">
+					</section>
+					<section>
+						<h4>Interactivity reveals overlooked categories.</h4>
+						<img src="images/barchart-3.svg">
+					</section>
+					<section>
+						<h4>Simple channels put things into perspective.</h4>
+						<img src="images/barchart-4.svg">
+					</section>
+					<section style="text-align:left;">
+						<h4>Other fixes:</h4>
+						<p>Put spending numbers in human-readable formats.</p>
+						<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+							d3.select(".tooltip-area")
+								.text(`
+									Area: ${
+										parseFloat(d.properties["SHAPE_Area"]/1e6)
+											.toLocaleString('en-US')
+									} sq km
+								`)		
+							</code></pre>
+							<p><small>(example code from <a href="https://anafabulic.github.io/HASS-assignment4/" target="_blank">HASS-assignment4</a>)</small></p>
+					</section>
+	
+				</section>
+				<section>
+					<section>
+						<h3 class="r-fit-text">What have we learned?</h3>
+						<p>&darr;</p>
+					</section>
+					<section style="text-align:justify;">
+						<h3>tl;dr:</h3>
+						<ol>
+							<li>Some visualisation idioms may look <em>pretty</em>, but conceal important information.</li>
+							<li>A <em>simpler</em> idiom with more interaction might be clearer than a dense one with lesser interaction.</li>
+							<li>Don't blindly pull from backend&mdash;<em>format</em> the numbers first.</li>	
+						</ol>
+					</section>
+				</section>
+				<section>
+					<p>
+						<img src="images/chart-treemap.png" height="200">
+					</p>
+					<h3>Thank you!</h3>
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
