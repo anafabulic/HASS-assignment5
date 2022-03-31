@@ -35,7 +35,7 @@
 					</section>
 					<section>
 						<a href="https://obamawhitehouse.archives.gov/interactive-budget" target="_blank">
-							<img src="images/whitehouse.png" class="r-stretch">
+							<img src="images/whitehouse.png">
 						</a>
 					</section>
 					<section>
@@ -96,11 +96,11 @@
 					</section>
 					<section style="text-align:left;">
 						<h4>Other fixes:</h4>
-						<p>Put spending numbers in human-readable formats.</p>
+						<p>Make big numbers human-readable.</p>
 						<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
 							d3.select(".tooltip-area")
 								.text(`
-									Area: ${
+									Area: ${ // convert sq m to sq km and add commas (00,000,000)
 										parseFloat(d.properties["SHAPE_Area"]/1e6)
 											.toLocaleString('en-US')
 									} sq km
